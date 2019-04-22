@@ -12,7 +12,7 @@ var passport = require('passport');
 var Users = require('./models/users');
 var indexRouter = require('./routes/index');
 var apiUsersRouter = require('./routes/api/users');
-
+var apiAuthRouter = require('./routes/api/auth');
 var app = express();
 
 // view engine setup
@@ -65,6 +65,7 @@ passport.serializeUser(function(user, done){
 passport.deserializeUser(function(user, done){
   done(null, user);
 });
+app.use('/api/auth', apiAuthRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
