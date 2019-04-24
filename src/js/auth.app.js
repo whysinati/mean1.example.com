@@ -25,6 +25,7 @@ var authApp = (function() {
 
     app.innerHTML=form;
   }
+
   function registrationForm(){
     var app = document.getElementById('app');
 
@@ -74,6 +75,7 @@ var authApp = (function() {
 
     app.innerHTML=form;
   }
+
   function postRequest(formId, url){
     let form = document.getElementById(formId);
     form.addEventListener('submit', function(e){
@@ -97,7 +99,6 @@ var authApp = (function() {
       xhr.send(JSON.stringify(object));
       xhr.onload = function(){
         let data = JSON.parse(xhr.response);
-        console.log(data);
         if(data.success===true){
           window.location.href = '/';
         }else{
@@ -106,6 +107,7 @@ var authApp = (function() {
       }
     });
   }
+
   return {
     load: function(){
 
@@ -121,14 +123,12 @@ var authApp = (function() {
           postRequest('loginForm', '/api/auth/login');
           break;
       }
+
     }
   }
-  return {
-    load: function(){
-      registrationForm();
-      postRequest('registrationForm', '/api/auth/register');
-    }
-  }
+
+})();
+
   var validate = (function() {
 
     function confirmPasswordMatch() {
@@ -155,11 +155,6 @@ var authApp = (function() {
     }
 
   })();
-
-  // ~line 115
-  validate.registrationForm();
-
-})();
 
 authApp.load();
 

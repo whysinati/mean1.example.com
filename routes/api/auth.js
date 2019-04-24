@@ -1,6 +1,7 @@
 //Register a new user
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
 var Users = require('../../models/users');
 
 router.post('/register', function(req,res,next){
@@ -57,20 +58,18 @@ router.post('/login', function(req, res, next) {
 
       return res.json({success:true, user: user });
 
-      router.delete('/logout', function(req, res){
-        req.logout();
-        if(!req.session.passport.user){
-          return res.json({success: 'true'});
-        }else{
-          return res.json({success: 'false'});
-        }
-      });
+
     });
   })(req, res, next);
 });
 
-router.get('/logout', function(req, res){
+router.delete('/logout', function(req, res){
   req.logout();
+  if(!req.session.passport.user){
+    return res.json({success: 'true'});
+  }else{
+    return res.json({success: 'false'});
+  }
 });
 
 module.exports = router;
